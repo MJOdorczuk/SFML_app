@@ -3,8 +3,13 @@
 #include <thread>
 #include <mutex>
 #include <list>
+#include <math.h>
 
 using namespace std;
+
+struct ballParams {
+	float x = 100, y = 100, vx = 5, vy = 0;
+};
 
 struct formParams {
 	int width;
@@ -13,6 +18,7 @@ struct formParams {
 	int x, y;
 	bool visible = true;
 	bool closing = false;
+	
 };
 
 /*
@@ -29,6 +35,7 @@ private:
 	// The form's thread
 	thread * formThread;
 	formParams params;
+	ballParams ball;
 	mutex mu;
 	bool threadRunning = true;
 
@@ -44,6 +51,9 @@ public:
 	void setTitle(string title);
 	int update(sf::RenderWindow * window);
 	string getTitle();
+
+	void setBall(ballParams ball);
+	ballParams getBall();
 	
 	bool hasToClose();
 };
