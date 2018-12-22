@@ -1,14 +1,24 @@
 #include "stdafx.h"
-#include "form.h"
+#include "form.hpp"
 
 Form::Form(int width, int height)
 {
 	this->params.width = width;
 	this->params.height = height;
+	Clicker c1, c2, c3;
+	c1.setPosition(500, 500);
+	c1.setColor(0, 0, 255);
+	c2.setPosition(650, 500);
+	c2.setColor(0, 255, 0);
+	c3.setPosition(800, 500);
+	c3.setColor(255, 0, 0);
+	clickers.push_back(c1);
+	clickers.push_back(c2);
+	clickers.push_back(c3);
+
 	this->formThread = new thread([&](Form * parent) {
 		sf::CircleShape shape(20.f);
 		shape.setFillColor(sf::Color::Green);
-		
 		sf::RenderWindow window(sf::VideoMode(parent->params.width, parent->params.height), "");
 		int code = NONE;
 		while (window.isOpen() && code == NONE)
@@ -19,6 +29,10 @@ Form::Form(int width, int height)
 			{
 				if (event.type == sf::Event::Closed)
 					window.close();
+				if (event.type == sf::Event::MouseButtonPressed)
+				{
+					parent->mouseButtonPressed(event.mouseButton.x, event.mouseButton.y);
+				}
 			}
 			ballParams ball = parent->getBall();
 			shape.setPosition(ball.x, ball.y);
@@ -26,14 +40,13 @@ Form::Form(int width, int height)
 			if (ball.x > 380) ball.vx = 0 - abs(ball.vx);
 			if (ball.y < 20) ball.vy = abs(ball.vy);
 			if (ball.y > 380) ball.vy = 0 - abs(ball.vy);
-			ball.vy += 0.1;
+			ball.vy += 0.1f;
 			ball.x += ball.vx;
 			ball.y += ball.vy;
 			parent->setBall(ball);
 			
-			window.clear();
-			window.draw(shape);
-			window.display();
+			parent->render(&window);
+
 			this_thread::sleep_for(chrono::milliseconds(20));
 		}
 	}, this);
@@ -79,6 +92,16 @@ int Form::update(sf::RenderWindow * window)
 	return NONE;
 }
 
+void Form::render(sf::RenderWindow * window)
+{
+	window->clear();
+	for (unsigned int i = 0; i < clickers.size(); i++)
+	{
+		window->draw(*(clickers.at(i).draw()));
+	}
+	window->display();
+}
+
 string Form::getTitle()
 {
 	mu.lock();
@@ -100,6 +123,14 @@ ballParams Form::getBall()
 	ballParams ret = ball;
 	mu.unlock();
 	return ret;
+}
+
+void Form::mouseButtonPressed(int x, int y)
+{
+	for (int i = 0; i < clickers.size(); i++)
+	{
+		if()
+	}
 }
 
 void Form::closeForm()

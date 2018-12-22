@@ -13,7 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="FormComponents">
+    <Filter Include="Form">
+      <UniqueIdentifier>{ac917e2a-ad8c-47fc-9d8e-2a2a430f9fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Form\FormComponents">
       <UniqueIdentifier>{0c68274a-b17d-4388-88cb-606fbb100d54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -24,25 +27,43 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="form.h">
+    <ClInclude Include="fcomponent.h">
+      <Filter>Form\FormComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="form.hpp">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="component.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DummyComponent.h">
+      <Filter>Form\FormComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="clicker.h">
+      <Filter>Form\FormComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="form.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="component.cpp">
+    <ClCompile Include="form.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="fcomponent.cpp">
+      <Filter>Form\FormComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandler.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyComponent.cpp">
+      <Filter>Form\FormComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="clicker.cpp">
+      <Filter>Form\FormComponents</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

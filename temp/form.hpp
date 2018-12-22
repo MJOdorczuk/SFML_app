@@ -2,8 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include <thread>
 #include <mutex>
-#include <list>
+#include <vector>
 #include <math.h>
+#include "clicker.h"
+#include "fcomponent.h"
 
 using namespace std;
 
@@ -18,7 +20,6 @@ struct formParams {
 	int x, y;
 	bool visible = true;
 	bool closing = false;
-	
 };
 
 /*
@@ -37,7 +38,10 @@ private:
 	formParams params;
 	ballParams ball;
 	mutex mu;
+	vector<Clicker> clickers;
 	bool threadRunning = true;
+
+	vector<FComponent> controls;
 
 	void closeForm();
 	bool getThreadRunning();
@@ -50,10 +54,12 @@ public:
 	void joinThread();
 	void setTitle(string title);
 	int update(sf::RenderWindow * window);
+	void render(sf::RenderWindow * window);
 	string getTitle();
 
 	void setBall(ballParams ball);
 	ballParams getBall();
+	void mouseButtonPressed(int x, int y);
 	
 	bool hasToClose();
 };
